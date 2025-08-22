@@ -1,0 +1,23 @@
+# --- Estágio 1: O Construtor (Builder) ---
+FROM node:18 as builder
+WORKDIR /usr/src/app
+COPY package*.json ./
+# Instala todas as dependências necessárias para o build
+RUN npm install
+COPY . .
+
+# --- Estágio 2: A Imagem Final (Production) ---
+FROM node:18-alpine
+WORKDIR /usr/src/app
+# Copiamos apenas os arquivos necessários do estágio "builder"
+COPY --from=builder /usr/src/app/package*.json ./
+# Instalamos APENAS as dependências de produção
+RUN npm install --omit=dev
+# Copiamos o código da aplicação do estágio "builder"
+COPY --from=builder /usr/src/app .
+
+# Define um usuário não-root para rodar a aplicação (mais seguro)
+USER node
+
+EXPOSE 3000
+CMD [ "node", "index.js" ]

@@ -1,0 +1,46 @@
+# Versão do Docker Compose que estamos usando (opcional nas versões mais novas)
+version: '3.8'
+
+# Aqui listamos todos os "serviços" (contêineres) da nossa aplicação
+services:
+  # --- Serviço da Aplicação Node.js (Produção) ---
+  app:
+    container_name: meu-app-prod-container
+    build:
+      # Diz para o Docker usar a pasta atual como contexto
+      context: .
+      # E usar o Dockerfile.prod como receita
+      dockerfile: Dockerfile.prod
+    ports:
+      - "3000:3000"
+    # Em produção, a aplicação depende do banco para funcionar
+    depends_on:
+      - db
+    # Passamos as credenciais do banco para a aplicação de forma segura
+    environment:
+      DB_HOST: db
+      DB_USER: ${MYSQL_USER}
+      DB_PASSWORD: ${MYSQL_PASSWORD}
+      DB_NAME: ${MYSQL_DATABASE}
+
+
+
+  # --- Serviço do Banco de Dados MySQL (Produção) ---
+  db:
+    image: mysql:8.0
+    container_name: meu-db-prod-container
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      # O volume garante que os dados do banco não se percam
+      - db_data:/var/lib/mysql
+
+
+
+# Declaração do volume que será gerenciado pelo Docker
+volumes:
+  db_data:

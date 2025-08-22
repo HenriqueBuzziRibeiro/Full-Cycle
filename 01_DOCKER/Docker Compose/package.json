@@ -1,0 +1,9 @@
+{
+  "name": "docker_projeto-compose-henrique",
+  "version": "1.0.0",
+  "description": "Meu projeto de produção com Docker Compose",
+  "main": "index.js",
+  "dependencies": { 
+    "express": "4.19.2"
+  }
+}

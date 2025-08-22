@@ -11,7 +11,7 @@ COPY package*.json ./
 RUN npm install
 
 # Copiamos o resto do código da nossa aplicação
-COPY . .
+#COPY . . - não é preciso quando se usa o docker-compose pois ele vai gerenciar isso poiso código é espelhado em tempo real
 
 # Expondo a porta que o nosso servidor usa
 EXPOSE 3000

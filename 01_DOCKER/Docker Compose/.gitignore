@@ -1,0 +1,5 @@
+# Ignorar o arquivo de segredos
+.env
+
+# Ignorar as dependências do Node.js
+node_modules
