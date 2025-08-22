@@ -1,0 +1,27 @@
+# ==============================================================================
+#  ARQUIVO .gitattributes PARA DETECÇÃO DE LINGUAGEM NO GITHUB (Linguist)
+# ==============================================================================
+
+# --- Regra Essencial para o Docker ---
+# Força o GitHub a sempre incluir o Dockerfile na análise de linguagens,
+# mesmo que o arquivo seja pequeno em comparação com o restante do código.
+# O padrão "**/" garante que ele encontre Dockerfiles em qualquer subpasta.
+**/Dockerfile linguist-detectable=true
+
+# --- Regras para Ignorar Código Gerado (Opcional, mas recomendado) ---
+# Ignora arquivos e pastas que contêm código minificado, transpilado ou de
+# dependências, que podem inflar a contagem de JavaScript incorretamente.
+# Descomente (remova o #) das linhas que se aplicam ao seu projeto.
+
+# dist/* linguist-generated=true
+# build/* linguist-generated=true
+# public/build/* linguist-generated=true
+# *.min.js linguist-generated=true
+# *.map linguist-generated=true
+
+# --- Regras para Arquivos de Documentação (Opcional) ---
+# Se você tiver muita documentação em Markdown, pode marcá-la como tal
+# para que ela não seja contada como código.
+# *.md linguist-documentation=true
+
+# --- Fim do Arquivo ---

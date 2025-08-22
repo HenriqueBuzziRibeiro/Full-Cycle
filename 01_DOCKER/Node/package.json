@@ -1,9 +1,0 @@
-{
-  "name": "app-node",
-  "version": "1.0.0",
-  "description": "App Node.js com Docker",
-  "main": "index.js",
-  "dependencies": {
-    "express": "4.19.2"
-  }
-}
