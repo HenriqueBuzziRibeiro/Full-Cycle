@@ -1,0 +1,13 @@
+!data/cache/.gitkeep
+.vagrant/
+/phpunit.xml
+/vendor/
+composer.lock
+config/development.config.php
+data/cache/*
+.phpunit.result.cache
+.phpcs-cache
+.composer/
+.history/
+.bash_history
+database.sqlite
